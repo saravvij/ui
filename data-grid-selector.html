@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        var eventListener = document.addEventListener('keydown', move);
+        var selected = null;
+
+        function move(event) {
+
+            switch (event.key) {
+                case 'ArrowUp':
+                    selected = moveVertically(event.target, 'previous');
+                    break;
+                case 'ArrowRight':
+                    selected = moveHorizontally(event.target, 'next');
+                    break;
+                case 'ArrowDown':
+                    selected = moveVertically(event.target, 'next');
+                    break;
+                case 'ArrowLeft':
+                    selected = moveHorizontally(event.target, 'previous');
+                    break;
+                default: return;
+            }
+            selected.querySelector('input').focus();
+
+            function moveVertically(node, dir) {
+                var cell = node.parentNode,
+                    row = cell?.parentNode,
+                    nextRow = row[dir + 'ElementSibling'];
+                return nextRow?.children[cell.cellIndex] || cell;
+            }
+
+            function moveHorizontally(node, dir) {
+                var cell = node.parentNode;
+                return cell[dir + 'ElementSibling'] || cell;
+            }
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <h1>Table -> Grid</h1>
+
+    <h2>Instructions</h2>
+    <ol>
+        <li>Enable the arrow keys (Left, Up, Down, Right) to navigate around grid.</li>
+    </ol>
+
+    <table data-grid>
+        <tbody>
+            <tr>
+                <td><input /></td>
+                <td><input /></td>
+                <td><input /></td>
+                <td><input /></td>
+            </tr>
+            <tr>
+                <td><input /></td>
+                <td><input /></td>
+                <td><input /></td>
+                <td><input /></td>
+            </tr>
+            <tr>
+                <td><input /></td>
+                <td><input /></td>
+                <td><input /></td>
+                <td><input /></td>
+            </tr>
+            <tr>
+                <td><input /></td>
+                <td><input /></td>
+                <td><input /></td>
+                <td><input /></td>
+            </tr>
+        <tbody>
+
+            <table>
+</body>
+
+</html>
